@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  loan:
+    container_name: loan-naja
+    build:
+      context: .
+      dockerfile: src/LoanNaja/Dockerfile
+    ports:
+      - "8080:80"
+  acceptancetests:
+    container_name: acceptancetests
+    build:
+      context: .
+      dockerfile: test/LoanNaja.Spec/Dockerfile
+    depends_on:
+      - loan
