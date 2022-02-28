@@ -6,6 +6,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using FluentAssertions;
+using System.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 public class LoanRepositoryTest
 {
@@ -15,7 +17,11 @@ public class LoanRepositoryTest
 
     public LoanRepositoryTest()
     {
-        loanRepository = new LoanRepository();
+        var optionsBuilder = new DbContextOptionsBuilder<LoanContext>();
+        optionsBuilder.UseSqlite($"Data Source=loan.db");
+        var context = new LoanContext(optionsBuilder.Options);
+
+        loanRepository = new LoanRepository(context);
     }
 
     [Fact]

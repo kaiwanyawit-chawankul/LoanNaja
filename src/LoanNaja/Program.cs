@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<LoanContext>(
-    options => options.UseSqlite($"Data Source=/Users/kaiwanyawit/Desktop/OSS/LoanNaja/db/loan.db")
+    options => options.UseSqlite($"Data Source=../../db/loan.db")
 );
 
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
