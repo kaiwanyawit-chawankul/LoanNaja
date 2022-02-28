@@ -10,6 +10,9 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 using LoanNaja.Core;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace LoanNaja.IntegrationTest;
 
@@ -106,9 +109,10 @@ class TestApiApplication : WebApplicationFactory<Program>
         builder.ConfigureServices(
             services =>
             {
-                //services.RemoveAll(typeof(DbContextOptions<NotesDbContext>));
-                //services.AddDbContext<NotesDbContext>(options =>
-                //    options.UseInMemoryDatabase("Testing", root));
+                services.RemoveAll(typeof(DbContextOptions<LoanContext>));
+                services.AddDbContext<LoanContext>(
+                    options => options.UseInMemoryDatabase("Testing")
+                );
             }
         );
 

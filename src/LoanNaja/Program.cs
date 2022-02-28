@@ -1,8 +1,14 @@
 using LoanNaja.Core;
+using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<ILoanRepository, LoanRepository>();
+builder.Services.AddDbContext<LoanContext>(
+    options => options.UseSqlite($"Data Source=../../db/loan.db")
+);
+
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
