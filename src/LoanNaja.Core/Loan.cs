@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Ardalis.GuardClauses;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoanNaja.Core;
 
@@ -8,6 +10,8 @@ public class Loan
     //   @Id
     //   @GeneratedValue(strategy = GenerationType.IDENTITY)
     // @JsonProperty
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; internal set; }
 
     public string Account { get; internal set; }
